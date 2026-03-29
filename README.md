@@ -4,6 +4,25 @@ Custom ISF (Interactive Shader Format) shaders compiled as FFGL plugins for Reso
 
 Each effect lives in its own folder with the `.fs` source and compiled `.bundle`.
 
+## Effects
+
+| Shader | Description |
+|--------|-------------|
+| AquarelaMask | Watercolor paint effect with Kuwahara smoothing and gradient mask |
+| BlurMask | Gaussian blur with gradient mask control |
+| EdgeGrow | Organic lichen-like growth extending from edges of source shapes |
+| EnergyPulse | Expanding pulse that illuminates shapes as it sweeps through |
+| GhostTrail | Ethereal ghost copies drifting from source shapes |
+| GradientAlpha | Gradient-based alpha control |
+| PulseRings | Concentric rings rippling outward from shape edges |
+| ShapeGen | Graphic score generator with 3 tracks of organic shapes |
+| SlitScreen | Repeats boundary pixels outward from a gradient mask edge |
+| SmartVignette | Vignette with round/square modes, movable center, optional image mask |
+| SmokeDissipation | Content wisps away like rising smoke with curl noise turbulence |
+| WarpFBM | Domain-warped FBM that organically warps source content with animated noise |
+
+Most effects share a common gradient mask system: `maskPos`, `maskWidth`, `fadeWidth`, `angle`, `radial`, `invert`.
+
 ## Compiling ISF to FFGL
 
 Shaders must be compiled into `.bundle` FFGL plugins for Resolume to load them. This uses [ffgl-rs](https://github.com/edeetee/ffgl-rs).
@@ -29,7 +48,7 @@ This compiles the ISF shader and deploys the `.bundle` to:
 
 ```bash
 cd ~/Documents/GitHub/ffgl-rs
-for f in ~/Documents/GitHub/resolume-shaders/*//*.fs; do
+for f in ~/Documents/GitHub/resolume-ffgl/*/*.fs; do
   bash ffgl-isf/deploy_isf.sh "$f"
 done
 ```
@@ -37,16 +56,3 @@ done
 ### After compiling
 
 Restart Resolume Arena to pick up new/updated effects.
-
-## Effects
-
-| Shader | Description |
-|--------|-------------|
-| AquarelaMask | Kuwahara-based watercolor with content-aware bleeding and gradient mask |
-| BlurMask | Gaussian blur with gradient mask control |
-| SmokeDissipation | Animated smoke wisps with curl noise turbulence and gradient mask |
-| PixelStretch | Pixel stretch that repeats boundary pixels outward from mask edge |
-| GradientAlpha | Gradient-based alpha control |
-| WarpFBM | Domain-warped FBM noise with fire colormap overlay |
-
-All effects share a common gradient mask system: `maskPos`, `maskWidth`, `fadeWidth`, `angle`, `radial`, `invert`.
